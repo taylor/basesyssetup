@@ -12,6 +12,27 @@ touch /root/.ssh/authorized_keys
 chmod 700 /root/.ssh
 chmod 600 /root/.ssh/authorized_keys
 
+if ! grep chris@codecafe.com /root/.ssh/authorized_keys ; then
+   wget -nv -O - http://codecafe.com/chris/ssh.pub   | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
+fi
+
+if ! grep taylor@codecafe.com /root/.ssh/authorized_keys ; then
+  wget -nv -O - http://codecafe.com/taylor/ssh.pub  | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
+fi
+
+if ! grep wwalker /root/.ssh/authorized_keys ; then
+   wget -nv -O - http://codecafe.com/wayne/ssh.pub   | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
+fi
+
+if ! grep backuppc@blackhole /root/.ssh/authorized_keys ; then
+   wget -nv -O - http://codecafe.com/wayne/ssh-backup.pub   | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
+fi
+
+sed -i.orig 's/^PermitRootLogin/#PermitRootLogin/' /etc/ssh/sshd_config
+echo "PermitRootLogin yes" | tee -a /etc/ssh/sshd_config
+service ssh restart
+service sshd restart
+
 RPM_SYS=0
 APT_SYS=0
 
@@ -61,22 +82,6 @@ mkdir -p /etc/skel/.ssh
 # curl http://codecafe.com/wayne/ssh.pub | tee -a /etc/skel/.ssh/authorized_keys
 #curl http://codecafe.com/wayne/ssh-backup.pub | tee -a /etc/skel/.ssh/authorized_keys
 
-if ! grep chris@codecafe.com /root/.ssh/authorized_keys ; then
-   wget -nv -O - http://codecafe.com/chris/ssh.pub   | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
-fi
-
-if ! grep taylor@codecafe.com /root/.ssh/authorized_keys ; then
-  wget -nv -O - http://codecafe.com/taylor/ssh.pub  | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
-fi
-
-if ! grep wwalker /root/.ssh/authorized_keys ; then
-   wget -nv -O - http://codecafe.com/wayne/ssh.pub   | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
-fi
-
-if ! grep backuppc@blackhole /root/.ssh/authorized_keys ; then
-   wget -nv -O - http://codecafe.com/wayne/ssh-backup.pub   | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
-fi
-
 cat <<"EOS"| tee -a /tmp/setup_user_account
 mkdir -p ~/.ssh
 touch ~/.ssh/authorized_keys
@@ -90,11 +95,15 @@ chmod +x /tmp/setup_user_account
 
 if [ -d /home/ubuntu ] ; then
   U=ubuntu
-else
+elif [ -d /home/ec2-user ] ; then
   U=ec2-user
+else
+  U=""
 fi
 
-su - $U -c "sh /tmp/setup_user_account"
+if [ -n "$U" ] ; then
+  su - $U -c "sh /tmp/setup_user_account"
+fi
 # END SETUP BASE SYSTEM
 
 wget -nv -O - http://www.opscode.com/chef/install.sh | bash
