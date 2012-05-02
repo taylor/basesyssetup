@@ -1,12 +1,14 @@
 set -g default-terminal "screen-256color"
-#set -g prefix DC,C-b
-#set -g prefix DC
-#bind-key b send-keys C-b
+
+## OLD
+set -g prefix DC,C-b
 set -g prefix DC
-set -g prefix2 C-b
-bind-key DC send-prefix
-bind-key b send-prefix -2
-#bind-key b send-keys C-b
+bind-key b send-keys C-b
+## NEW
+#set -g prefix DC
+#set -g prefix2 C-b
+#bind-key DC send-prefix
+#bind-key b send-prefix -2
 
 set-window-option -g window-status-current-bg red
 setw -g aggressive-resize on
