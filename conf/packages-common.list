@@ -1,0 +1,26 @@
+# FIXME: make this work for centos and debian????
+
+## editors
+vim-enhanced
+vim-common
+emacs
+ 
+#web
+curl
+curl-devel
+wget
+openssl
+ 
+#compression
+bzip2
+unzip
+zip
+
+#tools
+screen
+lsof
+nmap
+tcpdump
+ 
+#other
+ntp
