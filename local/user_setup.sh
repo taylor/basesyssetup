@@ -5,6 +5,12 @@ if [ ! "$UID" = 0 ] ; then
 	exit 1
 fi
 
+mydir=`dirname $0`
+confdir=`${mydir}/..`
+
+SCREENRC_URL="${confdir}/screenrc"
+TMUXCONF_URL="${confdir}/tmuxrc"
+
 set -e -x
 
 mkdir -p /root/.ssh /etc/skel/.ssh
@@ -29,6 +35,16 @@ echo shopt -s histappend |tee -a /etc/skel/.bashrc |tee -a /root/.bashrc
 
 ## SUDO defaults
 sed -ire '/NOPASSWD/ s/^# //' /etc/sudoers # %sudo doesn't need a password now!
+
+## TMUX/Screen config
+
+if [ ! -f /root/.screenrc ] ; then
+  cat $SCREENRC_URL | tee /etc/skel/.screenrc | tee /root/.screenrc
+fi
+
+if [ ! -f /root/.tmux.conf ] ; then
+  cat $TMUXCONF_URL | tee /etc/skel/.tmux.conf | tee /root/.tmux.conf
+fi
 
 set +x
 true
