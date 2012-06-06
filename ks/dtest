@@ -1,0 +1,18 @@
+
+# find the first drive that doesn’t have removable media and isn’t USB
+DIR="/sys/block"
+ROOTDRIVE=""
+for DEV in sda sdb sdc sdd sde hda hdb hdc hdd hde; do
+if [ -d $DIR/$DEV ]; then
+ls -l $DIR/$DEV/device | grep -q /usb
+if [ $? -ne 0 ]; then
+REMOVABLE=`cat $DIR/$DEV/removable`
+echo $REMOVABLE
+if (( $REMOVABLE == 0 )); then
+if [ -z $ROOTDRIVE ]; then
+ROOTDRIVE=$DEV
+fi
+fi
+fi
+fi
+done
