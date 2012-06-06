@@ -1,0 +1,3 @@
+# Linux system auto configuration
+
+auto installation and system setup scripts
