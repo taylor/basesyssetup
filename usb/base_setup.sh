@@ -8,7 +8,7 @@ fi
 sysrole="$1"
 
 mydir=`dirname $0`
-confdir=`${mydir}/..`
+confdir=`${mydir}/../conf`
 
 bash ${mydir}/user_setup.sh
 bash ${mydir}/install_packages.sh "$sysrole"

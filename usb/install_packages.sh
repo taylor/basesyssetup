@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mydir=`dirname $0`
-confdir=`${mydir}/..`
+confdir=`${mydir}/../conf`
 
 set -e -x
 
@@ -34,8 +34,6 @@ if [ "$RPM_SYS" ] ; then
   rpm -Uvh epel-release-6-5.noarch.rpm
   popd
 fi
-
-#FIXME: package file list for dist
 
 PACKAGE_NAME_LIST=""
 PACKAGE_LIST_FILE=${confdir}/${linuxflavor}/packages-common.list

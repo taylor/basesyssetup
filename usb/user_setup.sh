@@ -6,7 +6,8 @@ if [ ! "$UID" = 0 ] ; then
 fi
 
 mydir=`dirname $0`
-confdir=`${mydir}/..`
+confdir=`${mydir}/../conf`
+keydir=`${mydir}/../keys`
 
 SCREENRC_URL="${confdir}/screenrc"
 TMUXCONF_URL="${confdir}/tmuxrc"
@@ -20,7 +21,7 @@ chmod 600 /root/.ssh/authorized_keys /etc/skel/.ssh/authorized_keys
 
 for user in backuppc chris jim taylor wwalker ; do
   if ! grep $user /root/.ssh/authorized_keys ; then
-    cat /mnt/instmedia/keys/${user}-ssh.pub | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
+    cat ${keydir}/${user}-ssh.pub | tee -a /etc/skel/.ssh/authorized_keys | tee -a /root/.ssh/authorized_keys
   fi
 done
 
