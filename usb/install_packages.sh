@@ -3,6 +3,7 @@
 mydir=`dirname $0`
 confdir="${mydir}/../conf"
 
+sysrole="$1"
 
 RPM_SYS=0
 APT_SYS=0
@@ -55,8 +56,11 @@ function installpackages() {
 #PACKAGE_LIST_FILE=${confdir}/${linuxflavor}/packages-$sysrole.list
 for pf in packages-common.list packages-$sysrole.list
 do
+  echo "Checking packages in $pf"
   if [ -s "$pf" ] ; then 
     installpackages $pf
+  else
+    echo "$pf is empty"
   fi
 done
 
