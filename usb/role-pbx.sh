@@ -3,13 +3,11 @@
 mydir=`dirname $0`
 confdir="${mydir}/../conf"
 installersdir="${mydir}/../installers"
-targetdir="/root/pbxsetup/installers"
+targetdir="/root/syssetup/installers"
 
 sysrole="$1"
 
-
-#NOTE: asterisk moved to ../installers
-mkdir -p /root/installers
+mkdir -p /root/syssetup/installers
 for installer in pbx rvm asterisk adhearsion polycomtftp fax
 do
   if [ -f "${installersdir}/install-${installer}.sh" ] ; then

@@ -11,7 +11,8 @@ set -e -x
 mkdir -p /opt/downloads /opt/depot /opt/src
 
 cd /opt/downloads
-wget ftp://ftp.arlut.utexas.edu/pub/opt_depot/opt_depot-3.02.tar.gz
+#wget ftp://ftp.arlut.utexas.edu/pub/opt_depot/opt_depot-3.02.tar.gz
+yum install -y stow
 
 cat <<"EOM"> /etc/profile.d/opt.sh
 PATH=/opt/bin:$PATH

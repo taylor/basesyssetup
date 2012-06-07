@@ -10,6 +10,8 @@ sysrole="$1"
 mydir=`dirname $0`
 confdir="${mydir}/../conf"
 
+mkdir -p /root/syssetup/installers
+
 bash ${mydir}/user_setup.sh
 bash ${mydir}/install_packages.sh "$sysrole"
 bash ${mydir}/role_setup.sh "$sysrole"
