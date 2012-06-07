@@ -3,6 +3,7 @@
 mydir=`dirname $0`
 confdir="${mydir}/../conf"
 installersdir="${mydir}/../installers"
+targetdir="/root/pbxsetup/installers"
 
 sysrole="$1"
 
@@ -12,16 +13,13 @@ mkdir -p /root/installers
 for installer in pbx rvm asterisk adhearsion polycomtftp fax
 do
   if [ -f "${installersdir}/install-${installer}.sh" ] ; then
-    cp -v "${installersdir}/install-${installer}.sh" /root/installers
+    cp -v "${installersdir}/install-${installer}.sh" ${targetdir}
   fi
 done
 
-echo "Run /root/installer/install-pbx.sh after system installation"
+echo "Run ${targetdir}/install-pbx.sh after system installation"
 
+#Below no longer run during kickstart
 #bash ${mydir}/install-rvm.sh
-#bash ${mydir}/install-asterisk.sh
-#bash ${mydir}/install-adhearsion.sh
-#bash ${mydir}/install-polycomtftp.sh
-#bash ${mydir}/install-fax.sh
 
 true
