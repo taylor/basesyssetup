@@ -2,17 +2,21 @@
 
 mydir=`dirname $0`
 confdir="${mydir}/../conf"
-installers="${mydir}/../installers"
+installersdir="${mydir}/../installers"
 
 sysrole="$1"
 
 
 #NOTE: asterisk moved to ../installers
 mkdir -p /root/installers
-for installer in rvm asterisk adhearsion polycomtftp fax
+for installer in pbx rvm asterisk adhearsion polycomtftp fax
 do
-  cp "${installers}/install-${installer}.sh" /root/installers
+  if [ -f "${installersdir}/install-${installer}.sh" ] ; then
+    cp -v "${installersdir}/install-${installer}.sh" /root/installers
+  fi
 done
+
+echo "Run /root/installer/install-pbx.sh after system installation"
 
 #bash ${mydir}/install-rvm.sh
 #bash ${mydir}/install-asterisk.sh
