@@ -23,9 +23,12 @@ else
 fi
 
 if [ "$RPM_SYS" ] ; then
-  $pmapp -y install wget
-  EPELURL="http://download.fedoraproject.org/pub/epel/6/i386/${EPELRPM}"
+  which wget > /dev/null 2>&1
+  if [ ! "$?" = 0 ] ; then
+    $pmapp -y install wget
+  fi
   EPELRPM="epel-release-6-7.noarch.rpm"
+  EPELURL="http://download.fedoraproject.org/pub/epel/6/i386/${EPELRPM}"
   pushd /tmp
   wget $EPELURL
   rpm -Uvh "$EPELRPM"
