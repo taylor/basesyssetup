@@ -10,9 +10,12 @@ sysrole="$1"
 mydir=`dirname $0`
 confdir="${mydir}/../conf"
 
-bash ${mydir}/user_setup.sh
-bash ${mydir}/install_packages.sh "$sysrole"
-bash ${mydir}/role_setup.sh "$sysrole"
-#bash ${mydir}/install-vpn.sh "$sysrole"
+#vpndir=...
+#vpncert=...
+
+#if [ -f vpncert... 
+
+#set -x
+#set +x
 
 true
