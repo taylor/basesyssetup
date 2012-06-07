@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mydir=`dirname $0`
-confdir=`${mydir}/../conf`
+confdir="${mydir}/../conf"
 
 set -e -x
 
@@ -22,15 +22,10 @@ else
 fi
 
 if [ "$RPM_SYS" ] ; then
+  $pmapp -y install wget
   EPELURL="http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm"
   pushd /tmp
-  which wget > /dev/null 2>&1
-  if [ "$?" = "0" ] ; then
-    wget $EPELURL
-  else
-    curl -o epel-release-6-5.noarch.rpm $EPELURL
-  fi
-
+  wget $EPELURL
   rpm -Uvh epel-release-6-5.noarch.rpm
   popd
 fi

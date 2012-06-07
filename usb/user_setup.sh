@@ -6,8 +6,8 @@ if [ ! "$UID" = 0 ] ; then
 fi
 
 mydir=`dirname $0`
-confdir=`${mydir}/../conf`
-keydir=`${mydir}/../keys`
+confdir="${mydir}/../conf"
+keydir="${mydir}/../keys/ssh"
 
 SCREENRC_URL="${confdir}/screenrc"
 TMUXCONF_URL="${confdir}/tmuxrc"
