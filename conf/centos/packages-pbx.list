@@ -5,6 +5,7 @@ bzip2
 curl-devel
 gcc
 gcc-c++
+kernel-devel
 libffi-devel
 libtermcap-devel
 libtool

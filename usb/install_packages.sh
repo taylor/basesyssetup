@@ -8,7 +8,7 @@ sysrole="$1"
 RPM_SYS=0
 APT_SYS=0
 
-set -e -x
+set -x
 
 which rpm > /dev/null 2>&1
 #which apt-get > /dev/null 2>&1
@@ -57,8 +57,9 @@ function installpackages() {
 for pf in packages-common.list packages-$sysrole.list
 do
   echo "Checking packages in $pf"
-  if [ -s "$pf" ] ; then 
-    installpackages $pf
+  conf="${confdir}/$linuxflavor/$pf"
+  if [ -s "${conf}" ] ; then 
+    installpackages "$conf"
   else
     echo "$pf is empty"
   fi

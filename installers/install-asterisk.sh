@@ -39,6 +39,7 @@ pushd asterisk-1.8.13.0
 make
 make install
 popd
+popd
 
 
 set +x

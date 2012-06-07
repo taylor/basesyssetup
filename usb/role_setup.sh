@@ -7,7 +7,7 @@ sysrole="$1"
 
 bash "${mydir}/setup_opt.sh"
 
-set +x
+#set +x
 
 rolescript="${mydir}/role-${sysrole}.sh"
 
